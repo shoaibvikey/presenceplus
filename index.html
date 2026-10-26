@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PresencePlus — Custom Websites Built Exclusively for Restaurants, Cafes & Cloud Kitchens</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fraunces (Editorial Display Serif) + Plus Jakarta Sans (Clean Geometric Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Fraunces', 'Georgia', 'serif'],
+                    },
+                    colors: {
+                        brand: {
+                            cream: '#FAF7F2',         /* Primary Warm Alabaster / Cream */
+                            stone: '#F3EDE4',         /* Soft Warm Stone Surface */
+                            sand: '#E6DFD5',          /* Warm Sand Border */
+                            espresso: '#181411',      /* Rich Espresso Structural Dark & Ink */
+                            espressoLight: '#26201B', /* Elevated Espresso Surface */
+                            muted: '#5C534A',         /* Warm Muted Espresso Body Copy */
+                            chili: '#E04826',         /* Chili Terracotta Primary Accent & CTA */
+                            chiliDark: '#C43A1B',     /* Chili Terracotta Hover */
+                            chiliTint: '#FDECE8',     /* Soft Chili Tint */
+                            basil: '#1B7A46',         /* Basil Green Profit / 0% Fee / Pure Veg */
+                            basilDark: '#145E35',     /* Basil Hover */
+                            basilTint: '#E7F4EC',     /* Soft Basil Tint */
+                            gold: '#D9822B',          /* Warm Gold Accent */
+                            amber: '#F59E0B',         /* Star Rating Amber */
+                            goldTint: '#FEF5E7',      /* Soft Warm Gold Tint */
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 45px -15px rgba(24, 20, 17, 0.07)',
+                        'device': '0 30px 60px -15px rgba(24, 20, 17, 0.22)',
+                        'chili-glow': '0 14px 30px -8px rgba(224, 72, 38, 0.38)',
+                        'basil-glow': '0 14px 28px -8px rgba(27, 122, 70, 0.28)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAF7F2;
+            color: #181411;
+        }
+        .glass-header {
+            background: rgba(250, 247, 242, 0.90);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        /* Custom Range Slider Styling using Warm Sand & Chili Terracotta */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            height: 8px;
+            border-radius: 999px;
+            background: #3A312A;
+            outline: none;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #E04826;
+            border: 3px solid #FAF7F2;
+            box-shadow: 0 2px 8px rgba(24, 20, 17, 0.35);
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.12);
+        }
+        /* Subtle Warm Hospitality Dot Grid */
+        .hero-pattern {
+            background-color: #FAF7F2;
+            background-image: radial-gradient(rgba(92, 83, 74, 0.13) 1px, transparent 1px);
+            background-size: 22px 22px;
+        }
+        /* Authentic Indian FSSAI Standard Veg / Non-Veg Indicators */
+        .veg-dot {
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid #1B7A46;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .veg-dot::after {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #1B7A46;
+        }
+        .nonveg-dot {
+            width: 14px;
+            height: 14px;
+            border: 1.5px solid #C43A1B;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+        .nonveg-dot::after {
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-bottom: 7px solid #C43A1B;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-brand-chili selection:text-white overflow-x-hidden">
+
+    <!-- 1. TOP ANNOUNCEMENT BAR -->
+    <div class="bg-brand-espresso text-brand-cream text-xs sm:text-sm py-2.5 px-4 border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2 text-center">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-extrabold bg-brand-basil text-white tracking-wide uppercase">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span> Live in 7 Days
+            </span>
+            <span class="text-brand-stone/90 font-medium">Built Exclusively for Restaurants, Cafes, Cloud Kitchens &amp; Bars.</span>
+            <button onclick="openMockupModal('Top Announcement Bar')" class="text-brand-amber hover:text-white font-bold underline underline-offset-4 transition ml-1">
+                Claim Free 24-Hr Mockup &rarr;
+            </button>
+        </div>
+    </div>
+
+    <!-- STICKY NAVIGATION -->
+    <header class="sticky top-0 z-40 glass-header border-b border-brand-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-3.5">
+                <!-- PresencePlus Brand Logo with Subtle '+' Accent -->
+                <a href="#" class="flex items-center gap-2.5 group">
+                    <div class="w-10 h-10 rounded-xl bg-brand-espresso text-brand-cream flex items-center justify-center shadow-sm relative group-hover:bg-brand-chili transition">
+                        <i class="fa-solid fa-utensils text-sm"></i>
+                        <span class="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-brand-chili text-white text-[10px] font-extrabold flex items-center justify-center shadow ring-2 ring-brand-cream">+</span>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-2xl tracking-tight text-brand-espresso">Presence<span class="text-brand-chili">Plus</span></span>
+                        <span class="hidden sm:block text-[10px] uppercase tracking-[0.18em] text-brand-muted font-extrabold -mt-1">Restaurant Web Studio</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-6 text-sm font-semibold text-brand-muted">
+                    <a href="#comparison" class="hover:text-brand-espresso transition">Why Direct</a>
+                    <a href="#features" class="hover:text-brand-espresso transition">Features</a>
+                    <a href="#formats" class="hover:text-brand-espresso transition">Formats</a>
+                    <a href="#calculator" class="hover:text-brand-espresso transition">Calculator</a>
+                    <a href="#pricing" class="hover:text-brand-espresso transition">Pricing</a>
+                    <a href="#faq" class="hover:text-brand-espresso transition">FAQ</a>
+                </nav>
+
+                <!-- Primary CTA (#E04826) & Mobile Drawer Toggle -->
+                <div class="flex items-center gap-3">
+                    <button onclick="openMockupModal('Header CTA')" class="hidden sm:inline-flex items-center gap-2 bg-brand-chili hover:bg-brand-chiliDark text-white text-sm font-bold px-5 py-2.5 rounded-xl transition duration-200 shadow-chili-glow">
+                        <span>Get Free 24-Hr Mockup</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                    <button id="mobileMenuBtn" aria-label="Open Menu" class="lg:hidden p-2.5 rounded-xl border border-brand-sand bg-white text-brand-espresso hover:bg-brand-stone transition">
+                        <i id="mobileMenuIcon" class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Responsive Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden lg:hidden bg-brand-cream border-b border-brand-sand px-4 pt-2 pb-5 space-y-1.5 shadow-lg">
+            <a href="#comparison" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-brand-espresso hover:bg-brand-stone">Why Direct</a>
+            <a href="#features" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-brand-espresso hover:bg-brand-stone">Features</a>
+            <a href="#formats" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-brand-espresso hover:bg-brand-stone">Formats</a>
+            <a href="#calculator" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-brand-espresso hover:bg-brand-stone">Savings Calculator</a>
+            <a href="#pricing" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-brand-espresso hover:bg-brand-stone">Pricing</a>
+            <a href="#faq" class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-sm font-semibold text-brand-espresso hover:bg-brand-stone">FAQ</a>
+            <button onclick="openMockupModal('Mobile Drawer CTA')" class="w-full mt-2 bg-brand-chili hover:bg-brand-chiliDark text-white font-bold py-3 rounded-xl shadow-chili-glow text-sm">
+                Get Free 24-Hr Mockup &rarr;
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION WITH INTERACTIVE LIVE RESTAURANT WEBSITE SIMULATOR -->
+    <section id="live-demo" class="relative pt-10 pb-20 lg:pt-16 lg:pb-28 hero-pattern overflow-hidden border-b border-brand-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+                
+                <!-- Left Column: Hospitality Pitch & Conversion Hooks -->
+                <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-chiliTint border border-brand-chili/25 text-brand-chili text-xs font-extrabold uppercase tracking-wider">
+                        <i class="fa-solid fa-fire-flame-curved"></i>
+                        <span>100% Dedicated to Food &amp; Beverage Brands</span>
+                    </div>
+
+                    <h1 class="font-serif font-semibold text-4xl sm:text-5xl lg:text-[3.5rem] text-brand-espresso leading-[1.09] tracking-tight">
+                        Turn Hungry Diners Into <span class="italic text-brand-chili">Direct 0%-Commission</span> Regulars.
+                    </h1>
+
+                    <p class="text-brand-muted text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        <strong class="text-brand-espresso">PresencePlus</strong> designs and builds mouth-watering, mobile-first websites exclusively for <strong class="text-brand-espresso">restaurants, cafes, cloud kitchens, and bars</strong>—complete with interactive QR menus, 0%-commission direct ordering, and instant table reservations in 7 days.
+                    </p>
+
+                    <!-- Primary & Secondary Hero Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-1">
+                        <button onclick="openMockupModal('Hero Primary CTA')" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-brand-chili hover:bg-brand-chiliDark text-white font-bold px-7 py-4 rounded-2xl shadow-chili-glow transition transform hover:-translate-y-0.5">
+                            <span>Get Free 24-Hr Mockup</span>
+                            <i class="fa-solid fa-wand-magic-sparkles text-sm"></i>
+                        </button>
+                        <a href="#calculator" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white hover:bg-brand-stone text-brand-espresso border border-brand-sand font-bold px-6 py-4 rounded-2xl transition shadow-sm">
+                            <i class="fa-solid fa-indian-rupee-sign text-brand-basil"></i>
+                            <span>Calculate Commission Saved</span>
+                        </a>
+                    </div>
+
+                    <!-- Restaurant-Specific Trust Metrics -->
+                    <div class="pt-5 grid grid-cols-3 gap-4 border-t border-brand-sand max-w-lg mx-auto lg:mx-0">
+                        <div>
+                            <div class="font-serif font-bold text-2xl sm:text-3xl text-brand-espresso">7 Days</div>
+                            <div class="text-xs text-brand-muted font-semibold mt-0.5">Live in 7 Days</div>
+                        </div>
+                        <div>
+                            <div class="font-serif font-bold text-2xl sm:text-3xl text-brand-basil">0% Fee</div>
+                            <div class="text-xs text-brand-muted font-semibold mt-0.5">0% Commission Forever</div>
+                        </div>
+                        <div>
+                            <div class="font-serif font-bold text-2xl sm:text-3xl text-brand-chili">&lt;0.8s</div>
+                            <div class="text-xs text-brand-muted font-semibold mt-0.5">Mobile-First QR &amp; Order</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Live Restaurant Website Simulator -->
+                <div class="lg:col-span-6">
+                    <div class="mb-3 flex flex-wrap items-center justify-between gap-2">
+                        <span class="text-xs font-extrabold uppercase tracking-wider text-brand-espresso flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-brand-basil animate-ping"></span>
+                            Interactive Demo — Try Clicking Around:
+                        </span>
+                        <!-- Theme Switcher Tabs -->
+                        <div class="flex bg-brand-stone p-1 rounded-xl border border-brand-sand w-full sm:w-auto">
+                            <button onclick="switchSimTheme('cafe')" id="simTheme-cafe" class="sim-theme-btn flex-1 sm:flex-initial text-xs font-bold px-3 py-1.5 rounded-lg bg-brand-espresso text-brand-cream shadow-sm transition">
+                                ☕ Artisan Cafe
+                            </button>
+                            <button onclick="switchSimTheme('finedining')" id="simTheme-finedining" class="sim-theme-btn flex-1 sm:flex-initial text-xs font-bold px-3 py-1.5 rounded-lg text-brand-muted hover:text-brand-espresso transition">
+                                🍷 Fine Dining
+                            </button>
+                            <button onclick="switchSimTheme('cloud')" id="simTheme-cloud" class="sim-theme-btn flex-1 sm:flex-initial text-xs font-bold px-3 py-1.5 rounded-lg text-brand-muted hover:text-brand-espresso transition">
+                                🍔 Burger Cloud Kitchen
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Browser / Mobile Storefront Frame -->
+                    <div id="simulatorFrame" class="rounded-3xl border border-brand-sand bg-white shadow-device overflow-hidden transition-all duration-300">
+                        <!-- Browser Top Chrome -->
+                        <div class="bg-brand-espresso text-brand-cream px-4 py-2.5 flex items-center justify-between">
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-brand-chili"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-brand-amber"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-brand-basil"></span>
+                            </div>
+                            <div id="simUrlBar" class="bg-brand-espressoLight text-brand-stone text-[11px] font-mono px-3 py-1 rounded-lg flex items-center gap-1.5 border border-white/10">
+                                <i class="fa-solid fa-lock text-[9px] text-emerald-400"></i>
+                                <span>roastandcrumb.in</span>
+                            </div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded bg-brand-basil text-white">
+                                0% Fee Direct
+                            </span>
+                        </div>
+
+                        <!-- Simulated Restaurant Banner -->
+                        <div id="simHeroHeader" class="p-5 text-white transition-all">
+                            <!-- Dynamically Rendered -->
+                        </div>
+
+                        <!-- Mode Switcher: Order Direct vs Book a Table -->
+                        <div class="px-5 pt-3 bg-brand-cream border-b border-brand-sand flex items-center justify-between gap-2">
+                            <div class="flex gap-4">
+                                <button onclick="switchSimMode('order')" id="simMode-order" class="pb-2.5 text-xs sm:text-sm font-bold border-b-2 border-brand-chili text-brand-chili transition">
+                                    <i class="fa-solid fa-bag-shopping mr-1"></i> Order Direct (0% Comm.)
+                                </button>
+                                <button onclick="switchSimMode('book')" id="simMode-book" class="pb-2.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-brand-muted hover:text-brand-espresso transition">
+                                    <i class="fa-solid fa-chair mr-1"></i> Book a Table
+                                </button>
+                            </div>
+                            <span class="hidden sm:inline-block text-[11px] text-brand-basil font-extrabold pb-2">
+                                <i class="fa-solid fa-circle text-[7px] align-middle mr-1"></i> Open Now
+                            </span>
+                        </div>
+
+                        <!-- Dynamic Simulator Body (Menu + Filters OR Table Reservation Form) -->
+                        <div id="simBodyContent" class="p-5 bg-white min-h-[295px] flex flex-col justify-between">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. AGGREGATOR & PDF LINKS VS. YOUR OWN PRESENCEPLUS WEBSITE -->
+    <section id="comparison" class="py-20 bg-brand-espresso text-brand-cream relative overflow-hidden">
+        <!-- Subtle Warm Ambient Glow -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-chili/15 blur-3xl pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="inline-block px-3.5 py-1 rounded-full bg-brand-chili/20 border border-brand-chili/35 text-brand-amber font-extrabold text-xs uppercase tracking-[0.18em]">
+                    The Silent Profit Leak
+                </span>
+                <h2 class="font-serif font-semibold text-3xl sm:text-4xl text-brand-cream mt-3">
+                    What Happens When a Hungry Guest Clicks Your Instagram Bio or Google Listing?
+                </h2>
+                <p class="text-brand-stone/80 mt-3 text-sm sm:text-base">
+                    Compare how most restaurants lose high-intent diners to 30% aggregator fees and clunky PDFs versus owning a fast, branded PresencePlus website.
+                </p>
+
+                <!-- Interactive Spotlight Toggle -->
+                <div class="mt-7 inline-flex bg-brand-espressoLight p-1.5 rounded-2xl border border-white/10">
+                    <button id="compToggleOld" onclick="highlightComparison('old')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-brand-stone/75 hover:text-white transition">
+                        😩 Aggregator &amp; PDF Links
+                    </button>
+                    <button id="compToggleNew" onclick="highlightComparison('new')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-chili text-white shadow transition">
+                        🚀 Your PresencePlus Website
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 items-stretch">
+                <!-- Left Card: The Old Broken Way -->
+                <div id="compCardOld" class="rounded-3xl bg-brand-espressoLight border border-white/10 p-7 sm:p-9 flex flex-col justify-between transition duration-300">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 pb-5 border-b border-white/10">
+                            <div>
+                                <span class="text-[11px] font-extrabold uppercase tracking-wider text-brand-chili">THE OLD WAY</span>
+                                <h3 class="font-serif font-semibold text-2xl text-brand-cream mt-0.5">30% Aggregator Links &amp; Blurry PDFs</h3>
+                            </div>
+                            <span class="w-11 h-11 rounded-2xl bg-brand-chili/20 text-brand-chili flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </span>
+                        </div>
+
+                        <!-- Visual Pain Simulation -->
+                        <div class="my-6 bg-black/30 rounded-2xl p-4 border border-brand-chili/30 flex items-center justify-between gap-4">
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-spinner fa-spin text-brand-chili text-lg"></i>
+                                <div>
+                                    <div class="text-xs font-mono text-brand-cream">Final_Menu_Updated_v4.pdf (16.4 MB)</div>
+                                    <div class="text-[11px] text-brand-stone/70">Pinch-zooming tiny text &bull; Outdated prices</div>
+                                </div>
+                            </div>
+                            <span class="text-xs font-extrabold text-brand-chili whitespace-nowrap">62% Bounce</span>
+                        </div>
+
+                        <ul class="space-y-3.5 text-sm text-brand-stone/85">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-xmark text-brand-chili mt-1"></i>
+                                <span><strong class="text-white">28%–35% Commission Bleed:</strong> Sending your own Instagram &amp; Google fans straight to food apps eats your entire net profit.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-xmark text-brand-chili mt-1"></i>
+                                <span><strong class="text-white">Zero Customer Data:</strong> You never get your repeat diners’ phone numbers or birthdays for weekend WhatsApp specials.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-xmark text-brand-chili mt-1"></i>
+                                <span><strong class="text-white">Competitor Distraction:</strong> Once a customer clicks an aggregator link, 5 rival restaurants run ads right above your menu.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-xmark text-brand-chili mt-1"></i>
+                                <span><strong class="text-white">Invisible on Google "Near Me":</strong> Google cannot read dishes inside a scanned PDF image when locals search <em>"best woodfired pizza near me"</em>.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-7 pt-4 border-t border-white/10 flex items-center justify-between text-xs text-brand-chili font-bold">
+                        <span>Result: Low margins &amp; rented customers</span>
+                        <span>~8% Net Profit Kept</span>
+                    </div>
+                </div>
+
+                <!-- Right Card: The PresencePlus Way -->
+                <div id="compCardNew" class="rounded-3xl bg-brand-cream text-brand-espresso border-4 border-brand-chili p-7 sm:p-9 flex flex-col justify-between shadow-2xl transition duration-300">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 pb-5 border-b border-brand-sand">
+                            <div>
+                                <span class="inline-block px-2.5 py-0.5 rounded-md bg-brand-basilTint text-brand-basil text-[11px] font-extrabold uppercase tracking-wider">THE PRESENCEPLUS WAY</span>
+                                <h3 class="font-serif font-semibold text-2xl text-brand-espresso mt-1">Your Own High-Converting Restaurant Site</h3>
+                            </div>
+                            <span class="w-11 h-11 rounded-2xl bg-brand-basil text-white flex items-center justify-center text-xl shadow">
+                                <i class="fa-solid fa-store"></i>
+                            </span>
+                        </div>
+
+                        <!-- Visual Win Simulation -->
+                        <div class="my-6 bg-white rounded-2xl p-4 border border-brand-sand flex items-center justify-between gap-4 shadow-sm">
+                            <div class="flex items-center gap-3">
+                                <span class="w-9 h-9 rounded-xl bg-brand-basil text-white flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </span>
+                                <div>
+                                    <div class="text-xs font-bold text-brand-espresso">yourrestaurant.in &bull; Loads in 0.6s</div>
+                                    <div class="text-[11px] text-brand-basil font-semibold">Veg Toggle &bull; Direct Cart &bull; 1-Tap Table Booking</div>
+                                </div>
+                            </div>
+                            <span class="text-xs font-extrabold px-2.5 py-1 rounded-lg bg-brand-basilTint text-brand-basil whitespace-nowrap">0% Commission</span>
+                        </div>
+
+                        <ul class="space-y-3.5 text-sm text-brand-muted">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-basil mt-1"></i>
+                                <span><strong class="text-brand-espresso">Keep 100% of Order Value:</strong> Accept direct pickup, delivery &amp; table orders via UPI/Card or structured WhatsApp tickets.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-basil mt-1"></i>
+                                <span><strong class="text-brand-espresso">Own Every Diner’s Phone Number:</strong> Automatically build a VIP list of regulars you can invite back on slow Tuesdays.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-basil mt-1"></i>
+                                <span><strong class="text-brand-espresso">One Menu Powers Dine-In QR + Web:</strong> Print-ready table QR codes open the exact same live, searchable menu—update prices once!</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-circle-check text-brand-basil mt-1"></i>
+                                <span><strong class="text-brand-espresso">Rank #1 on Local Google Searches:</strong> Built-in Restaurant &amp; Menu Schema helps hungry locals discover your outlet organically.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-7 pt-4 border-t border-brand-sand flex items-center justify-between text-xs text-brand-espresso font-extrabold">
+                        <span>Result: Full brand control &amp; direct profit</span>
+                        <span class="px-2.5 py-1 rounded-md bg-brand-basilTint text-brand-basil">100% Revenue Kept</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 6 RESTAURANT-FOCUSED FEATURE CARDS + LIVE KITCHEN STOCK TOGGLE -->
+    <section id="features" class="py-20 lg:py-24 bg-brand-cream border-b border-brand-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+                <div class="max-w-2xl">
+                    <span class="text-brand-chili font-extrabold text-xs uppercase tracking-[0.2em]">Purpose-Built Hospitality Tech</span>
+                    <h2 class="font-serif font-semibold text-3xl sm:text-4xl text-brand-espresso mt-2">
+                        Everything Built Into Your PresencePlus Website
+                    </h2>
+                    <p class="text-brand-muted mt-3 text-base sm:text-lg">
+                        We don’t use bloated corporate templates. Every PresencePlus website ships with six restaurant-specific growth tools out of the box.
+                    </p>
+                </div>
+
+                <!-- Interactive 1-Tap Kitchen "Mark Sold Out" Mini-Demo -->
+                <div class="bg-white border border-brand-sand rounded-2xl px-4 py-3.5 shadow-soft flex items-center gap-3.5 self-start">
+                    <div class="w-9 h-9 rounded-xl bg-brand-goldTint text-brand-gold flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <div class="text-xs">
+                        <div class="font-extrabold text-brand-espresso">Try Live Kitchen Stock Toggle:</div>
+                        <div id="liveDishStatusText" class="text-brand-basil font-bold">Truffle Fries: In Stock</div>
+                    </div>
+                    <button id="soldOutDemoBtn" onclick="toggleSoldOutDemo()" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-espresso hover:bg-brand-chili text-white transition shrink-0">
+                        Mark Sold Out
+                    </button>
+                </div>
+            </div>
+
+            <!-- 6 Focused Feature Cards Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft hover:border-brand-chili/50 transition group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-stone text-brand-espresso flex items-center justify-center text-xl mb-5 group-hover:bg-brand-espresso group-hover:text-white transition">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">QR Table &amp; Direct Ordering</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed mb-4">
+                        Instant dish search, Pure Veg / Non-Veg / Jain toggles, spice-level tags, chef’s bestseller badges, customization add-ons, and synced print-ready dine-in table QR tents.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-brand-sand text-[11px] font-bold text-brand-basil">
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-basilTint">Pure Veg Filter</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-stone text-brand-espresso">Synced Table QR</span>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft hover:border-brand-basil/50 transition group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-basilTint text-brand-basil flex items-center justify-center text-xl mb-5 group-hover:bg-brand-basil group-hover:text-white transition">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">Instant WhatsApp &amp; UPI Checkout</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed mb-4">
+                        Let guests build a cart with cooking instructions, apply promo codes, and pay via Razorpay/UPI—or send a clean, itemized order ticket straight to your kitchen WhatsApp at 0% commission.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-brand-sand text-[11px] font-bold text-brand-basil">
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-basilTint">0% Aggregator Fee</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-basilTint">UPI + WhatsApp Ticket</span>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft hover:border-brand-chili/50 transition group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-chiliTint text-brand-chili flex items-center justify-center text-xl mb-5 group-hover:bg-brand-chili group-hover:text-white transition">
+                        <i class="fa-solid fa-champagne-glasses"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">Table Reservations &amp; Waitlist</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed mb-4">
+                        Capture date, dinner time slot, guest count, indoor/rooftop seating preference, and birthday/anniversary requests—delivered instantly to your host desk phone without per-cover fees.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-brand-sand text-[11px] font-bold text-brand-chili">
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-chiliTint">Group Party Inquiries</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-stone text-brand-espresso">Zero Cover Fees</span>
+                    </div>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft hover:border-brand-chili/50 transition group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-goldTint text-brand-gold flex items-center justify-center text-xl mb-5 group-hover:bg-brand-gold group-hover:text-white transition">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">Google Maps &amp; Local SEO Ranker</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed mb-4">
+                        Structured JSON-LD Restaurant, Cuisine, Opening Hours &amp; Menu Schema plus Google Maps 1-tap directions so hungry locals find your restaurant before aggregator ads.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-brand-sand text-[11px] font-bold text-brand-gold">
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-goldTint">Google Maps Embed</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-stone text-brand-espresso">Menu Search Schema</span>
+                    </div>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft hover:border-brand-chili/50 transition group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-chiliTint text-brand-chili flex items-center justify-center text-xl mb-5 group-hover:bg-brand-chili group-hover:text-white transition">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">1-Tap Sold-Out Menu Control</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed mb-4">
+                        Update dish prices, launch a weekend special, or mark an item "Sold Out" right from your smartphone in 30 seconds during rush hour—without ever calling a developer.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-brand-sand text-[11px] font-bold text-brand-espresso">
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-stone">Phone-Friendly Admin</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-stone">Unlimited Edits</span>
+                    </div>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft hover:border-brand-basil/50 transition group">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-basilTint text-brand-basil flex items-center justify-center text-xl mb-5 group-hover:bg-brand-basil group-hover:text-white transition">
+                        <i class="fa-solid fa-users-viewfinder"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">Customer Data &amp; Repeat Offers</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed mb-4">
+                        Own every diner’s name, phone number, and favorite dish history alongside verified Google reviews—making it effortless to bring regulars back with direct promo codes.
+                    </p>
+                    <div class="flex flex-wrap gap-1.5 pt-3 border-t border-brand-sand text-[11px] font-bold text-brand-basil">
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-basilTint">100% Data Ownership</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-goldTint text-brand-gold">★ Verified Reviews</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FOOD FORMAT TABS -->
+    <section id="formats" class="py-20 lg:py-24 bg-brand-stone/55 border-b border-brand-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-chili font-extrabold text-xs uppercase tracking-[0.2em]">Built Around Your Concept</span>
+                <h2 class="font-serif font-semibold text-3xl sm:text-4xl text-brand-espresso mt-2">
+                    Tailored Website Architecture by Food Format
+                </h2>
+                <p class="text-brand-muted mt-3 text-base sm:text-lg">
+                    A cloud kitchen needs 3-tap late-night ordering, while fine dining needs atmospheric storytelling and table reservations. Pick your format to inspect what PresencePlus builds:
+                </p>
+            </div>
+
+            <!-- Format Selector Tabs (Active in Rich Espresso #181411) -->
+            <div class="flex flex-wrap justify-center gap-2.5 sm:gap-3 mb-10">
+                <button onclick="selectFoodFormat('cafes')" id="fmtBtn-cafes" class="fmt-tab-btn px-5 py-3 rounded-2xl font-bold text-sm bg-brand-espresso text-brand-cream shadow-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-mug-hot text-brand-amber"></i>
+                    <span>Cafes &amp; Bakeries</span>
+                </button>
+                <button onclick="selectFoodFormat('dining')" id="fmtBtn-dining" class="fmt-tab-btn px-5 py-3 rounded-2xl font-bold text-sm bg-white text-brand-espresso hover:bg-brand-stone border border-brand-sand transition flex items-center gap-2">
+                    <i class="fa-solid fa-wine-glass text-brand-chili"></i>
+                    <span>Casual &amp; Fine Dining</span>
+                </button>
+                <button onclick="selectFoodFormat('cloud')" id="fmtBtn-cloud" class="fmt-tab-btn px-5 py-3 rounded-2xl font-bold text-sm bg-white text-brand-espresso hover:bg-brand-stone border border-brand-sand transition flex items-center gap-2">
+                    <i class="fa-solid fa-burger text-brand-chili"></i>
+                    <span>Cloud Kitchens &amp; QSR</span>
+                </button>
+                <button onclick="selectFoodFormat('bars')" id="fmtBtn-bars" class="fmt-tab-btn px-5 py-3 rounded-2xl font-bold text-sm bg-white text-brand-espresso hover:bg-brand-stone border border-brand-sand transition flex items-center gap-2">
+                    <i class="fa-solid fa-martini-glass-citrus text-brand-chili"></i>
+                    <span>Bars &amp; Lounges</span>
+                </button>
+            </div>
+
+            <!-- Dynamic Food Format Panel -->
+            <div id="foodFormatPanel" class="bg-brand-cream rounded-3xl border border-brand-sand p-6 sm:p-10 lg:p-12 shadow-soft">
+                <!-- Populated dynamically via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. INTERACTIVE ₹ INR AGGREGATOR COMMISSION SAVINGS CALCULATOR -->
+    <section id="calculator" class="py-20 lg:py-24 bg-brand-cream border-b border-brand-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-espresso text-brand-cream rounded-[2rem] p-6 sm:p-10 lg:p-14 shadow-2xl border border-white/10 relative overflow-hidden">
+                <!-- Subtle Warm Glow -->
+                <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-brand-chili/15 blur-3xl pointer-events-none"></div>
+
+                <div class="grid lg:grid-cols-12 gap-10 items-center relative z-10">
+                    
+                    <!-- Left: Interactive Sliders -->
+                    <div class="lg:col-span-7 space-y-7">
+                        <div>
+                            <span class="inline-flex items-center gap-1.5 text-xs font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full bg-brand-basil text-white">
+                                <i class="fa-solid fa-calculator"></i> Restaurant ROI Calculator
+                            </span>
+                            <h2 class="font-serif font-semibold text-3xl sm:text-4xl text-brand-cream mt-3">
+                                See How Much Profit Your PresencePlus Website Saves Every Month
+                            </h2>
+                            <p class="text-brand-stone/80 text-sm sm:text-base mt-2">
+                                Shift even 25–30% of your regular diners from aggregator apps to your own direct ordering link (via takeout bag stickers &amp; Instagram bio).
+                            </p>
+                        </div>
+
+                        <!-- Slider 1: Monthly Aggregator Orders -->
+                        <div class="bg-brand-espressoLight p-5 rounded-2xl border border-white/10 space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <label for="calcOrders" class="text-sm font-semibold text-brand-stone">Monthly Aggregator Orders Shifted Direct</label>
+                                <span id="calcOrdersVal" class="font-serif font-bold text-xl text-brand-amber">180 orders / mo</span>
+                            </div>
+                            <input id="calcOrders" type="range" min="30" max="1200" step="10" value="180" oninput="runSavingsCalculator()" class="w-full">
+                            <div class="flex justify-between text-[11px] text-brand-stone/60">
+                                <span>30 orders (~1/day)</span>
+                                <span>600 orders (20/day)</span>
+                                <span>1,200 orders (40/day)</span>
+                            </div>
+                        </div>
+
+                        <!-- Slider 2: Average Order Value (INR) -->
+                        <div class="bg-brand-espressoLight p-5 rounded-2xl border border-white/10 space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <label for="calcAov" class="text-sm font-semibold text-brand-stone">Average Order Value (AOV in ₹)</label>
+                                <span id="calcAovVal" class="font-serif font-bold text-xl text-brand-amber">₹650</span>
+                            </div>
+                            <input id="calcAov" type="range" min="300" max="2500" step="50" value="650" oninput="runSavingsCalculator()" class="w-full">
+                            <div class="flex justify-between text-[11px] text-brand-stone/60">
+                                <span>₹300 (Cafe / QSR)</span>
+                                <span>₹1,200 (Casual Dining)</span>
+                                <span>₹2,500 (Family / Fine Dine)</span>
+                            </div>
+                        </div>
+
+                        <!-- Slider 3: Aggregator Commission Rate -->
+                        <div class="bg-brand-espressoLight p-5 rounded-2xl border border-white/10 space-y-2.5">
+                            <div class="flex items-center justify-between">
+                                <label for="calcComm" class="text-sm font-semibold text-brand-stone">Aggregator Commission + Ad Cut (%)</label>
+                                <span id="calcCommVal" class="font-serif font-bold text-xl text-brand-amber">28%</span>
+                            </div>
+                            <input id="calcComm" type="range" min="18" max="35" step="1" value="28" oninput="runSavingsCalculator()" class="w-full">
+                            <div class="flex justify-between text-[11px] text-brand-stone/60">
+                                <span>18% Base</span>
+                                <span>28% Typical (+GST/Ads)</span>
+                                <span>35% Heavy Promos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Calculated Output Card -->
+                    <div class="lg:col-span-5 bg-brand-cream text-brand-espresso rounded-3xl p-7 sm:p-8 shadow-xl border border-brand-sand flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between pb-4 border-b border-brand-sand">
+                                <span class="text-xs font-extrabold uppercase tracking-wider text-brand-muted">Your Direct Profit Kept</span>
+                                <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold bg-brand-basilTint text-brand-basil">0% PresencePlus Cut</span>
+                            </div>
+
+                            <div class="my-6">
+                                <div class="text-xs font-bold text-brand-muted uppercase">Monthly Commission Saved</div>
+                                <div id="outMonthlySaved" class="font-serif font-bold text-4xl sm:text-5xl text-brand-basil mt-1">₹32,760</div>
+                                <div class="text-xs text-brand-muted mt-1">on <span id="outMonthlyGmv" class="font-extrabold text-brand-espresso">₹1,17,000</span> direct monthly order volume</div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-3.5 mb-6">
+                                <div class="bg-brand-basilTint p-4 rounded-2xl border border-brand-basil/20">
+                                    <div class="text-[11px] font-bold text-brand-basil uppercase">Annual Profit Kept</div>
+                                    <div id="outAnnualSaved" class="font-serif font-bold text-xl sm:text-2xl text-brand-basil mt-1">₹3,93,120</div>
+                                </div>
+                                <div class="bg-brand-chiliTint p-4 rounded-2xl border border-brand-chili/20">
+                                    <div class="text-[11px] font-extrabold text-brand-chili uppercase">Website Payback</div>
+                                    <div id="outPaybackDays" class="font-serif font-bold text-xl sm:text-2xl text-brand-chili mt-1">~23 Days</div>
+                                </div>
+                            </div>
+
+                            <div class="bg-brand-stone border border-brand-sand rounded-2xl p-4 text-xs text-brand-espresso leading-relaxed">
+                                <i class="fa-solid fa-lightbulb text-brand-gold mr-1"></i>
+                                <strong>Bonus Included:</strong> Print-ready <em>"Order Direct on Our Website for 10% Off"</em> takeout bag-seal stickers so your existing Zomato/Swiggy buyers convert automatically!
+                            </div>
+                        </div>
+
+                        <button onclick="openMockupModal('Commission Calculator CTA')" class="mt-6 w-full py-4 px-6 rounded-2xl bg-brand-chili hover:bg-brand-chiliDark text-white font-bold text-sm shadow-chili-glow transition flex items-center justify-center gap-2">
+                            <span>Start Keeping 100% Profit — Get Free Preview</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. 3 TRANSPARENT ₹ INR WEBSITE PACKAGES -->
+    <section id="pricing" class="py-20 lg:py-24 bg-brand-cream border-b border-brand-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-chili font-extrabold text-xs uppercase tracking-[0.2em]">One-Time Build &bull; Zero Order Commissions</span>
+                <h2 class="font-serif font-semibold text-3xl sm:text-4xl text-brand-espresso mt-2">
+                    Transparent Restaurant Website Packages
+                </h2>
+                <p class="text-brand-muted mt-3 text-base sm:text-lg">
+                    Pay once for your custom PresencePlus design and build. Own your domain, code, and customer database forever.
+                </p>
+
+                <!-- Optional Hosting / Care Toggle -->
+                <div class="mt-7 inline-flex flex-wrap items-center justify-center bg-brand-stone p-1.5 rounded-2xl border border-brand-sand">
+                    <button id="careSelfBtn" onclick="toggleCareMode('self')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-espresso text-brand-cream transition">
+                        One-Time Build (Self-Managed)
+                    </button>
+                    <button id="careManagedBtn" onclick="toggleCareMode('managed')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-brand-muted hover:text-brand-espresso transition">
+                        + Cloud Hosting &amp; Unlimited Menu Care <span class="text-brand-chili font-extrabold">(₹999/mo)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3 Clear Restaurant Website Packages -->
+            <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- Package 1: Starter Digital Menu & Booking -->
+                <div class="bg-white rounded-3xl border border-brand-sand p-8 flex flex-col justify-between shadow-soft hover:border-brand-chili/40 transition">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-muted">Starter Presence</span>
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-stone text-brand-espresso">Live in 5 Days</span>
+                        </div>
+                        <h3 class="font-serif font-semibold text-2xl text-brand-espresso mt-2">Starter Digital Menu &amp; Booking</h3>
+                        <p class="text-sm text-brand-muted mt-2">Perfect for cafes, bakeries &amp; dine-in bistros upgrading from PDF menus to a sleek brand website.</p>
+
+                        <div class="my-6 pb-6 border-b border-brand-sand">
+                            <div class="flex items-baseline gap-1.5">
+                                <span class="font-serif font-bold text-4xl text-brand-espresso">₹14,999</span>
+                                <span class="text-xs font-semibold text-brand-muted">one-time setup</span>
+                            </div>
+                            <p class="care-subtext text-xs text-brand-basil font-bold mt-1.5">Includes 1st year SSL security &amp; handover training</p>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-brand-espresso mb-8">
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Custom 5-Page Mobile-First Restaurant Website</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Searchable Interactive QR Menu (Veg/Non-Veg filters)</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Print-Ready Dine-In Table QR Tent Artwork</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Ambience &amp; Dish Photo Gallery + Chef Story</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Google Maps Directions &amp; 1-Tap WhatsApp Table Booking</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>30-Second Mobile Menu Price/Item Editor</span></li>
+                        </ul>
+                    </div>
+
+                    <button onclick="openMockupModal('Package: Starter Digital Menu & Booking (₹14,999)')" class="w-full py-3.5 px-5 rounded-xl border-2 border-brand-espresso text-brand-espresso hover:bg-brand-espresso hover:text-white font-bold text-sm transition">
+                        Preview Starter For My Outlet
+                    </button>
+                </div>
+
+                <!-- Package 2: Direct Ordering Pro (Highlighted in Rich Espresso #181411 + Chili Terracotta CTA) -->
+                <div class="bg-brand-espresso text-brand-cream rounded-3xl border-4 border-brand-chili p-8 flex flex-col justify-between shadow-device relative lg:-translate-y-3">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-chili text-white text-[11px] font-extrabold uppercase tracking-widest px-4 py-1 rounded-full shadow whitespace-nowrap">
+                        ★ Most Popular &bull; Best ROI
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-amber">Full Direct Engine</span>
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-white/10 text-brand-cream">Live in 7 Days</span>
+                        </div>
+                        <h3 class="font-serif font-semibold text-2xl text-white mt-2">Direct Ordering Pro</h3>
+                        <p class="text-sm text-brand-stone/80 mt-2">Built for restaurants &amp; cloud kitchens ready to capture 0%-commission pickup, delivery &amp; table bookings.</p>
+
+                        <div class="my-6 pb-6 border-b border-white/15">
+                            <div class="flex items-baseline gap-1.5">
+                                <span class="font-serif font-bold text-4xl text-white">₹24,999</span>
+                                <span class="text-xs font-semibold text-brand-stone/75">one-time setup</span>
+                            </div>
+                            <p class="care-subtext text-xs text-emerald-400 font-bold mt-1.5">0% commission forever &bull; Keep 100% of every order</p>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-brand-cream/95 mb-8">
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span><strong>Everything in Starter Digital Menu</strong>, plus:</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Built-In Cart, Add-On Modifiers &amp; Direct Ordering Engine</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>UPI / Razorpay Checkout + Structured WhatsApp Order Tickets</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Promo &amp; First-Order Coupon Codes (e.g. <code class="text-brand-amber">WELCOME15</code>)</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Exportable Customer Phone &amp; Order History Database</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Dedicated Table &amp; Private Party Reservation Form</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> <span>Local "Near Me" Google Menu &amp; Cuisine SEO Setup</span></li>
+                        </ul>
+                    </div>
+
+                    <button onclick="openMockupModal('Package: Direct Ordering Pro (₹24,999)')" class="w-full py-4 px-5 rounded-xl bg-brand-chili hover:bg-brand-chiliDark text-white font-bold text-sm shadow-chili-glow transition">
+                        Get Free Direct-Order Mockup &rarr;
+                    </button>
+                </div>
+
+                <!-- Package 3: Multi-Outlet Brand Suite -->
+                <div class="bg-white rounded-3xl border border-brand-sand p-8 flex flex-col justify-between shadow-soft hover:border-brand-chili/40 transition">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">2+ Outlets / Chains</span>
+                            <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-goldTint text-brand-gold">7–10 Days</span>
+                        </div>
+                        <h3 class="font-serif font-semibold text-2xl text-brand-espresso mt-2">Multi-Outlet Brand Suite</h3>
+                        <p class="text-sm text-brand-muted mt-2">For growing hospitality groups, multi-branch cafes, cloud kitchen brands &amp; franchise concepts.</p>
+
+                        <div class="my-6 pb-6 border-b border-brand-sand">
+                            <div class="flex items-baseline gap-1.5">
+                                <span class="font-serif font-bold text-4xl text-brand-espresso">₹44,999</span>
+                                <span class="text-xs font-semibold text-brand-muted">up to 4 outlets</span>
+                            </div>
+                            <p class="care-subtext text-xs text-brand-basil font-bold mt-1.5">₹5,000 per additional outlet thereafter</p>
+                        </div>
+
+                        <ul class="space-y-3 text-sm text-brand-espresso mb-8">
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span><strong>Everything in Direct Ordering Pro</strong>, plus:</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Nearest Outlet Locator &amp; Branch-Wise Menu/Price Switcher</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Delivery Radius Pin-Code / KM Fee Calculator</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Full Online Payment Gateway + Catering / Franchise Inquiry Page</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Custom Domain Connection + Branch-Specific WhatsApp Routing</span></li>
+                            <li class="flex items-start gap-2.5"><i class="fa-solid fa-check text-brand-basil mt-1"></i> <span>Priority WhatsApp Support &amp; Staff Walkthrough</span></li>
+                        </ul>
+                    </div>
+
+                    <button onclick="openMockupModal('Package: Multi-Outlet Brand Suite (₹44,999)')" class="w-full py-3.5 px-5 rounded-xl border-2 border-brand-espresso text-brand-espresso hover:bg-brand-espresso hover:text-white font-bold text-sm transition">
+                        Request Multi-Outlet Demo
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. 7-DAY LAUNCH PROCESS + RESTAURANT OWNER FAQs -->
+    <section id="faq" class="py-20 lg:py-24 bg-brand-stone/55 border-b border-brand-sand">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- 7-Day Launch Process -->
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-brand-chili font-extrabold text-xs uppercase tracking-[0.2em]">Zero Kitchen Disruption</span>
+                <h2 class="font-serif font-semibold text-3xl sm:text-4xl text-brand-espresso mt-2">
+                    From Paper Menu to Live PresencePlus Website in 7 Days
+                </h2>
+                <p class="text-brand-muted mt-3 text-base sm:text-lg">
+                    You don’t need to write a single word of copy or upload 100 dishes yourself—our hospitality web team handles the entire setup.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
+                <!-- Day 1 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft relative">
+                    <div class="flex items-center justify-between mb-5">
+                        <span class="px-3 py-1 rounded-full bg-brand-chiliTint text-brand-chili text-xs font-extrabold uppercase tracking-wider">Day 1</span>
+                        <i class="fa-solid fa-camera-retro text-brand-muted text-lg"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">Share Menu &amp; Vibe</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">
+                        Send us your current menu PDF/photo, logo, and Instagram handle on WhatsApp. A 15-minute call locks in your colors, vibe, and ordering flow.
+                    </p>
+                </div>
+
+                <!-- Day 3 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft relative">
+                    <div class="flex items-center justify-between mb-5">
+                        <span class="px-3 py-1 rounded-full bg-brand-stone text-brand-espresso text-xs font-extrabold uppercase tracking-wider">Day 3</span>
+                        <i class="fa-solid fa-paintbrush text-brand-chili text-lg"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">Review Live Mockup</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">
+                        Preview your custom homepage and interactive menu live on your phone. Request tweaks to typography, dish highlights, or layout effortlessly.
+                    </p>
+                </div>
+
+                <!-- Day 5 -->
+                <div class="bg-white rounded-3xl p-7 border border-brand-sand shadow-soft relative">
+                    <div class="flex items-center justify-between mb-5">
+                        <span class="px-3 py-1 rounded-full bg-brand-goldTint text-brand-gold text-xs font-extrabold uppercase tracking-wider">Day 5</span>
+                        <i class="fa-solid fa-qrcode text-brand-espresso text-lg"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">Ordering &amp; QR Setup</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">
+                        We digitize every dish, add-on, and tax setting, test WhatsApp/UPI checkout, and generate your print-ready table QR tents &amp; takeout stickers.
+                    </p>
+                </div>
+
+                <!-- Day 7 -->
+                <div class="bg-white rounded-3xl p-7 border-2 border-brand-basil/40 shadow-soft relative">
+                    <div class="flex items-center justify-between mb-5">
+                        <span class="px-3 py-1 rounded-full bg-brand-basilTint text-brand-basil text-xs font-extrabold uppercase tracking-wider">Day 7</span>
+                        <i class="fa-solid fa-rocket text-brand-basil text-lg"></i>
+                    </div>
+                    <h3 class="font-serif font-semibold text-xl text-brand-espresso mb-2">Launch Live!</h3>
+                    <p class="text-sm text-brand-muted leading-relaxed">
+                        We connect your custom domain, link your Google Business Profile &amp; Instagram bio, and give your manager a 10-minute menu-editor handover.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive FAQ Accordion for Restaurant Owners -->
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-10">
+                    <span class="text-brand-chili font-extrabold text-xs uppercase tracking-[0.2em]">Common Questions</span>
+                    <h2 class="font-serif font-semibold text-3xl text-brand-espresso mt-2">
+                        Questions Restaurant Owners Ask PresencePlus
+                    </h2>
+                </div>
+
+                <div id="faqContainer" class="space-y-3.5">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FINAL CONVERSION BANNER -->
+    <section class="py-16 bg-brand-cream">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-brand-espresso rounded-[2rem] p-8 sm:p-14 text-center text-brand-cream relative overflow-hidden shadow-2xl border border-white/10">
+                <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-brand-chili/20 blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-brand-basil/20 blur-3xl pointer-events-none"></div>
+                <div class="max-w-2xl mx-auto space-y-6 relative z-10">
+                    <span class="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-brand-chili/20 border border-brand-chili/35 text-brand-amber">
+                        Zero Obligation &bull; See Your Restaurant Online First
+                    </span>
+                    <h2 class="font-serif font-semibold text-3xl sm:text-5xl leading-tight text-white">
+                        Want to See How Your Menu Looks as a Custom PresencePlus Website?
+                    </h2>
+                    <p class="text-brand-stone/85 text-base sm:text-lg">
+                        Send us your restaurant name and Instagram or current menu link. We’ll craft a personalized homepage &amp; interactive menu preview in 24 hours—completely free.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+                        <button onclick="openMockupModal('Bottom CTA Banner')" class="w-full sm:w-auto bg-brand-chili hover:bg-brand-chiliDark text-white font-bold px-8 py-4 rounded-2xl shadow-chili-glow transition">
+                            Get My Free 24-Hr Mockup &rarr;
+                        </button>
+                        <button onclick="copyStudioContact()" class="w-full sm:w-auto bg-white/10 hover:bg-white/15 border border-white/15 text-brand-cream font-semibold px-6 py-4 rounded-2xl transition inline-flex items-center justify-center gap-2">
+                            <i class="fa-regular fa-copy text-brand-amber"></i>
+                            <span id="studioEmailLabel">hello@presenceplus.in</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WARM ESPRESSO FOOTER -->
+    <footer class="bg-brand-espresso text-brand-stone pt-14 pb-10 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-white/10">
+                <div class="md:col-span-2 space-y-3">
+                    <a href="#" class="flex items-center gap-2.5 text-brand-cream">
+                        <div class="w-9 h-9 rounded-xl bg-brand-espressoLight border border-white/15 text-brand-cream flex items-center justify-center relative">
+                            <i class="fa-solid fa-utensils text-sm"></i>
+                            <span class="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-brand-chili text-white text-[9px] font-extrabold flex items-center justify-center">+</span>
+                        </div>
+                        <span class="font-serif font-bold text-2xl">Presence<span class="text-brand-chili">Plus</span></span>
+                    </a>
+                    <p class="text-sm text-brand-stone/75 max-w-sm leading-relaxed">
+                        A specialized restaurant web design &amp; engineering studio building high-converting websites, digital QR menus, and 0%-commission direct ordering exclusively for food &amp; beverage brands.
+                    </p>
+                    <div class="pt-1">
+                        <a href="mailto:hello@presenceplus.in" class="inline-flex items-center gap-2 text-xs font-bold text-brand-amber hover:text-white transition">
+                            <i class="fa-regular fa-envelope"></i>
+                            <span>hello@presenceplus.in</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3.5">Explore</h4>
+                    <ul class="space-y-2 text-sm text-brand-stone/75">
+                        <li><a href="#live-demo" class="hover:text-brand-amber transition">Interactive Live Simulator</a></li>
+                        <li><a href="#comparison" class="hover:text-brand-amber transition">Why Direct</a></li>
+                        <li><a href="#features" class="hover:text-brand-amber transition">6 Restaurant Features</a></li>
+                        <li><a href="#calculator" class="hover:text-brand-amber transition">Commission Savings Calculator</a></li>
+                        <li><a href="#pricing" class="hover:text-brand-amber transition">Website Packages (₹ INR)</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3.5">Built For</h4>
+                    <ul class="space-y-2 text-sm text-brand-stone/75">
+                        <li><a href="#formats" onclick="selectFoodFormat('cafes')" class="hover:text-brand-amber transition">Specialty Cafes &amp; Bakeries</a></li>
+                        <li><a href="#formats" onclick="selectFoodFormat('dining')" class="hover:text-brand-amber transition">Casual &amp; Fine Dining</a></li>
+                        <li><a href="#formats" onclick="selectFoodFormat('cloud')" class="hover:text-brand-amber transition">Cloud Kitchens &amp; QSRs</a></li>
+                        <li><a href="#formats" onclick="selectFoodFormat('bars')" class="hover:text-brand-amber transition">Craft Bars &amp; Lounges</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-7 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-stone/60">
+                <p>&copy; 2026 PresencePlus Restaurant Web Studio (hello@presenceplus.in). Crafted exclusively for food &amp; beverage brands.</p>
+                <div class="flex items-center gap-4">
+                    <span>100% Domain &amp; Code Ownership</span>
+                    <span class="text-brand-chili">&bull;</span>
+                    <span>0% Order Commission Forever</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 9. INTERACTIVE "GET YOUR FREE 24-HOUR HOMEPAGE MOCKUP" MODAL -->
+    <div id="mockupModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-brand-espresso/80 backdrop-blur-sm">
+        <div class="bg-brand-cream rounded-3xl max-w-lg w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-brand-sand p-6 sm:p-8 relative">
+            
+            <!-- Close Button -->
+            <button onclick="closeMockupModal()" aria-label="Close modal" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-brand-stone hover:bg-brand-sand text-brand-espresso flex items-center justify-center transition">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Form View -->
+            <div id="mockupFormView">
+                <span id="modalSelectedBadge" class="inline-block text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 rounded-full bg-brand-chiliTint text-brand-chili mb-2">
+                    Free 24-Hour Homepage Preview
+                </span>
+                <h3 class="font-serif font-semibold text-2xl sm:text-3xl text-brand-espresso">
+                    Get Your Free 24-Hour Homepage Mockup
+                </h3>
+                <p class="text-sm text-brand-muted mt-1 mb-4">
+                    Share your outlet details below. PresencePlus will design a live mobile preview using your actual menu &amp; branding and send it to your WhatsApp.
+                </p>
+
+                <!-- Dynamic Estimated Savings Pill Passed from Calculator -->
+                <div id="modalSavingsSummary" class="mb-5 bg-brand-basilTint border border-brand-basil/25 rounded-2xl px-4 py-2.5 flex items-center justify-between text-xs">
+                    <span class="text-brand-espresso font-semibold"><i class="fa-solid fa-piggy-bank text-brand-basil mr-1.5"></i>Est. Aggregator Savings:</span>
+                    <span id="modalSavingsAmt" class="font-extrabold text-brand-basil">₹32,760 / month</span>
+                </div>
+
+                <form id="restaurantLeadForm" onsubmit="handleMockupSubmit(event)" class="space-y-4">
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-espresso mb-1">Restaurant / Brand Name *</label>
+                            <input type="text" id="inpRestName" required placeholder="e.g. Fig & Fire Bistro" class="w-full rounded-xl border border-brand-sand bg-white px-3.5 py-2.5 text-sm text-brand-espresso focus:outline-none focus:ring-2 focus:ring-brand-chili">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-espresso mb-1">City &amp; Locality *</label>
+                            <input type="text" id="inpCity" required placeholder="e.g. Connaught Place, Delhi" class="w-full rounded-xl border border-brand-sand bg-white px-3.5 py-2.5 text-sm text-brand-espresso focus:outline-none focus:ring-2 focus:ring-brand-chili">
+                        </div>
+                    </div>
+
+                    <div class="grid sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-espresso mb-1">Food Format *</label>
+                            <select id="inpFormat" required class="w-full rounded-xl border border-brand-sand bg-white px-3.5 py-2.5 text-sm text-brand-espresso focus:outline-none focus:ring-2 focus:ring-brand-chili">
+                                <option value="Cafe / Bakery">Cafe / Coffee Roastery / Bakery</option>
+                                <option value="Casual / Fine Dining">Casual or Fine Dining Restaurant</option>
+                                <option value="Cloud Kitchen / QSR">Cloud Kitchen / Burger / Pizza QSR</option>
+                                <option value="Bar / Brewery / Lounge">Bar / Microbrewery / Rooftop Lounge</option>
+                                <option value="Multi-Outlet Chain">Multi-Outlet Restaurant Brand</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-brand-espresso mb-1">Owner / Manager WhatsApp *</label>
+                            <input type="tel" id="inpWhatsapp" required placeholder="+91 98765 43210" class="w-full rounded-xl border border-brand-sand bg-white px-3.5 py-2.5 text-sm text-brand-espresso focus:outline-none focus:ring-2 focus:ring-brand-chili">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-brand-espresso mb-1">Instagram Handle or Current Zomato / Menu Link</label>
+                        <input type="text" id="inpMenuLink" placeholder="@yourrestaurant or Zomato/Google link (so we can pull sample dishes)" class="w-full rounded-xl border border-brand-sand bg-white px-3.5 py-2.5 text-sm text-brand-espresso focus:outline-none focus:ring-2 focus:ring-brand-chili">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-brand-espresso mb-1">Preferred PresencePlus Package</label>
+                        <select id="inpPackage" class="w-full rounded-xl border border-brand-sand bg-white px-3.5 py-2.5 text-sm text-brand-espresso focus:outline-none focus:ring-2 focus:ring-brand-chili">
+                            <option value="Direct Ordering Pro (₹24,999)">Direct Ordering Pro — ₹24,999 (Most Popular)</option>
+                            <option value="Starter Digital Menu & Booking (₹14,999)">Starter Digital Menu &amp; Booking — ₹14,999</option>
+                            <option value="Multi-Outlet Brand Suite (₹44,999)">Multi-Outlet Brand Suite — ₹44,999</option>
+                            <option value="Not sure yet — suggest best fit">Not sure yet — recommend after seeing my menu</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-2xl bg-brand-chili hover:bg-brand-chiliDark text-white font-bold text-sm shadow-chili-glow transition flex items-center justify-center gap-2">
+                        <span>Send My Free PresencePlus Preview</span>
+                        <i class="fa-brands fa-whatsapp text-base"></i>
+                    </button>
+                    <p class="text-[11px] text-center text-brand-muted">100% free 24-hour preview. No advance payment required to see your mockup.</p>
+                </form>
+            </div>
+
+            <!-- Instant Confirmation State -->
+            <div id="mockupSuccessView" class="hidden text-center py-6 space-y-5">
+                <div class="w-16 h-16 rounded-2xl bg-brand-basilTint text-brand-basil flex items-center justify-center text-3xl mx-auto border border-brand-basil/25">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                    <span class="inline-block px-3 py-0.5 rounded-full bg-brand-chiliTint text-brand-chili text-xs font-extrabold uppercase tracking-wider">Kitchen Ticket Received!</span>
+                    <h3 class="font-serif font-semibold text-2xl text-brand-espresso mt-2">Your PresencePlus Mockup Is On the Grill</h3>
+                    <p id="mockupConfirmSummary" class="text-sm text-brand-muted mt-2 max-w-md mx-auto leading-relaxed"></p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 border border-brand-sand text-left text-xs text-brand-muted space-y-1.5">
+                    <div class="font-extrabold text-brand-espresso uppercase tracking-wider">What happens in the next 24 hours:</div>
+                    <div>1. Our PresencePlus designer pulls your logo, signature dishes &amp; brand vibe.</div>
+                    <div>2. We build a clickable homepage + mobile QR menu preview link.</div>
+                    <div>3. We share your live preview link directly on WhatsApp!</div>
+                </div>
+                <button onclick="closeMockupModal()" class="px-6 py-3 rounded-xl bg-brand-espresso text-white text-sm font-bold hover:bg-brand-chili transition">
+                    Back to PresencePlus
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Custom Non-Intrusive Toast Notification -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden items-center gap-3 bg-brand-espresso text-brand-cream px-5 py-3.5 rounded-2xl shadow-2xl border border-white/15 text-xs sm:text-sm font-semibold max-w-sm">
+        <i class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
+        <span id="toastText">Order simulated!</span>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- INTERACTIVE APPLICATION JAVASCRIPT         -->
+    <!-- ========================================== -->
+    <script>
+        // 1. Mobile Navigation Drawer
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const mobileMenuIcon = document.getElementById('mobileMenuIcon');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileDrawer.classList.contains('hidden');
+            mobileDrawer.classList.toggle('hidden');
+            mobileMenuIcon.className = isHidden ? 'fa-solid fa-xmark text-lg' : 'fa-solid fa-bars text-lg';
+        });
+
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileDrawer.classList.add('hidden');
+                mobileMenuIcon.className = 'fa-solid fa-bars text-lg';
+            });
+        });
+
+        // Toast Helper (Never uses alert() or confirm())
+        let toastTimeout = null;
+        function triggerToast(message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastText').textContent = message;
+            toast.classList.remove('hidden');
+            toast.classList.add('flex');
+            if (toastTimeout) clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+                toast.classList.remove('flex');
+            }, 3800);
+        }
+
+        // Clipboard Copy Helper
+        function copyStudioContact() {
+            try {
+                const el = document.createElement('textarea');
+                el.value = 'hello@presenceplus.in';
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                document.getElementById('studioEmailLabel').textContent = 'Copied hello@presenceplus.in!';
+                triggerToast('Copied hello@presenceplus.in to clipboard');
+                setTimeout(() => {
+                    document.getElementById('studioEmailLabel').textContent = 'hello@presenceplus.in';
+                }, 2500);
+            } catch (e) {
+                triggerToast('Reach us at hello@presenceplus.in');
+            }
+        }
+
+        // ==========================================
+        // 2. HERO LIVE RESTAURANT WEBSITE SIMULATOR
+        // ==========================================
+        const simulatorThemes = {
+            cafe: {
+                url: 'roastandcrumb.in',
+                name: 'Roast & Crumb Bakehouse',
+                tagline: 'Small-Batch Sourdough, Specialty Pour-Overs & All-Day Brunch',
+                locality: 'Khan Market / Bandra • 8:00 AM – 10:30 PM',
+                headerBg: 'bg-gradient-to-r from-[#2D211B] via-[#4A3428] to-[#6E4735]',
+                promoCode: 'DIRECT10 for Free Cortado',
+                items: [
+                    { id: 'c1', name: 'Avocado Chilli Sourdough Toast', price: 360, veg: true, bestseller: true, tag: 'Chef Special' },
+                    { id: 'c2', name: 'Belgian Dark Chocolate Croissant', price: 240, veg: true, bestseller: true, tag: 'Fresh Baked' },
+                    { id: 'c3', name: 'Smoked Chicken & Pesto Focaccia', price: 410, veg: false, bestseller: false, tag: 'High Protein' },
+                    { id: 'c4', name: 'Spanish Iced Sea-Salt Latte', price: 270, veg: true, bestseller: true, tag: 'Cold Brew' }
+                ]
+            },
+            finedining: {
+                url: 'zafranandember.in',
+                name: 'Zafran & Ember Kitchen',
+                tagline: 'Modern Wood-Fired Indian Tapas & Craft Botanical Cocktails',
+                locality: 'Mehrauli / GK-II • 12:30 PM – 11:45 PM',
+                headerBg: 'bg-gradient-to-r from-[#181411] via-[#2C1E18] to-[#52281D]',
+                promoCode: 'Complimentary Dessert on Direct Table Booking',
+                items: [
+                    { id: 'f1', name: 'Truffle Burrata & Garlic Naan', price: 540, veg: true, bestseller: true, tag: 'Signature' },
+                    { id: 'f2', name: 'Charcoal Smoked Galouti Sliders', price: 680, veg: false, bestseller: true, tag: 'Chef Tasting' },
+                    { id: 'f3', name: 'Lotus Stem Honey-Chilli Crisp', price: 460, veg: true, bestseller: false, tag: 'Spicy' },
+                    { id: 'f4', name: '24-Hour Dal Zafran & ChurChur Paratha', price: 590, veg: true, bestseller: true, tag: 'Must Try' }
+                ]
+            },
+            cloud: {
+                url: 'smashstackburgers.in',
+                name: 'SmashStack Late-Night Burgers',
+                tagline: 'Crispy-Edge Smashed Burgers, Loaded Peri Fries & Thickshakes',
+                locality: '3 Outlets • 30-Min Direct Delivery till 3 AM',
+                headerBg: 'bg-gradient-to-r from-[#8E2510] via-[#C43A1B] to-[#E04826]',
+                promoCode: 'SAVE ₹120 vs Food Apps (Auto-Applied)',
+                items: [
+                    { id: 'b1', name: 'Double Oklahoma Smash Chicken Burger', price: 349, veg: false, bestseller: true, tag: 'Top Seller' },
+                    { id: 'b2', name: 'Crispy Paneer Nashville Hot Burger', price: 319, veg: true, bestseller: true, tag: 'Fiery' },
+                    { id: 'b3', name: 'Truffle Parmesan Loaded Crinkle Fries', price: 229, veg: true, bestseller: false, tag: 'Shareable' },
+                    { id: 'b4', name: 'Salted Caramel Lotus Biscoff Shake', price: 249, veg: true, bestseller: true, tag: 'Thickshake' }
+                ]
+            }
+        };
+
+        let activeSimTheme = 'cafe';
+        let activeSimMode = 'order'; // 'order' or 'book'
+        let activeSimFilter = 'all'; // 'all', 'veg', 'bestsellers'
+        let simCart = { c1: 1, c4: 1 };
+        let simGuestCount = 4;
+        let simTimeSlot = '8:00 PM';
+
+        function switchSimTheme(themeKey) {
+            activeSimTheme = themeKey;
+            activeSimFilter = 'all';
+
+            // Pre-seed 1 item in cart so visitors immediately see the interactive direct cart bar
+            const firstDishId = simulatorThemes[themeKey].items[0].id;
+            simCart = { [firstDishId]: 1 };
+
+            document.querySelectorAll('.sim-theme-btn').forEach(btn => {
+                btn.className = 'sim-theme-btn flex-1 sm:flex-initial text-xs font-bold px-3 py-1.5 rounded-lg text-brand-muted hover:text-brand-espresso transition';
+            });
+            const activeBtn = document.getElementById(`simTheme-${themeKey}`);
+            if (activeBtn) {
+                activeBtn.className = 'sim-theme-btn flex-1 sm:flex-initial text-xs font-bold px-3 py-1.5 rounded-lg bg-brand-espresso text-brand-cream shadow-sm transition';
+            }
+
+            renderSimulator();
+        }
+
+        function switchSimMode(mode) {
+            activeSimMode = mode;
+            const orderTab = document.getElementById('simMode-order');
+            const bookTab = document.getElementById('simMode-book');
+
+            if (mode === 'order') {
+                orderTab.className = 'pb-2.5 text-xs sm:text-sm font-bold border-b-2 border-brand-chili text-brand-chili transition';
+                bookTab.className = 'pb-2.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-brand-muted hover:text-brand-espresso transition';
+            } else {
+                bookTab.className = 'pb-2.5 text-xs sm:text-sm font-bold border-b-2 border-brand-chili text-brand-chili transition';
+                orderTab.className = 'pb-2.5 text-xs sm:text-sm font-bold border-b-2 border-transparent text-brand-muted hover:text-brand-espresso transition';
+            }
+            renderSimulator();
+        }
+
+        function setSimFilter(filter) {
+            activeSimFilter = filter;
+            renderSimulator();
+        }
+
+        function updateSimCart(itemId, delta) {
+            const current = simCart[itemId] || 0;
+            const next = Math.max(0, current + delta);
+            if (next === 0) {
+                delete simCart[itemId];
+            } else {
+                simCart[itemId] = next;
+            }
+            renderSimulator();
+        }
+
+        function triggerSimCheckout() {
+            const theme = simulatorThemes[activeSimTheme];
+            let total = 0;
+            let count = 0;
+            theme.items.forEach(item => {
+                if (simCart[item.id]) {
+                    total += item.price * simCart[item.id];
+                    count += simCart[item.id];
+                }
+            });
+            if (count === 0) {
+                triggerToast('Add at least 1 dish from the menu to test direct checkout!');
+                return;
+            }
+            const savedCommission = Math.round(total * 0.28);
+            triggerToast(`Direct UPI / WhatsApp Order Simulated: ₹${total} (${count} items) • Saved ₹${savedCommission} in app fees!`);
+        }
+
+        function triggerSimReservation(e) {
+            e.preventDefault();
+            const theme = simulatorThemes[activeSimTheme];
+            triggerToast(`Table Reserved at ${theme.name} for ${simGuestCount} Guests at ${simTimeSlot}! Host notified on WhatsApp.`);
+        }
+
+        function renderSimulator() {
+            const theme = simulatorThemes[activeSimTheme];
+            document.getElementById('simUrlBar').innerHTML = `<i class="fa-solid fa-lock text-[9px] text-emerald-400"></i><span>${theme.url}</span>`;
+
+            // Render Simulated Restaurant Header
+            const headerEl = document.getElementById('simHeroHeader');
+            headerEl.className = `p-5 text-white transition-all ${theme.headerBg}`;
+            headerEl.innerHTML = `
+                <div class="flex items-start justify-between gap-3">
+                    <div>
+                        <div class="text-[11px] uppercase tracking-wider text-brand-stone/80 font-semibold">${theme.locality}</div>
+                        <h3 class="font-serif font-semibold text-xl sm:text-2xl text-white mt-0.5">${theme.name}</h3>
+                        <p class="text-xs text-white/85 mt-0.5">${theme.tagline}</p>
+                    </div>
+                    <span class="bg-brand-goldTint text-brand-espresso px-2.5 py-1 rounded-lg text-[11px] font-extrabold whitespace-nowrap shadow-sm"><span class="text-brand-amber">★</span> 4.9 Direct</span>
+                </div>
+                <div class="mt-3 inline-flex items-center gap-1.5 text-[11px] font-bold bg-black/30 border border-white/15 px-2.5 py-1 rounded-md text-amber-300">
+                    <i class="fa-solid fa-tag"></i> ${theme.promoCode}
+                </div>
+            `;
+
+            const bodyEl = document.getElementById('simBodyContent');
+
+            if (activeSimMode === 'order') {
+                // Filter menu items
+                const filteredItems = theme.items.filter(item => {
+                    if (activeSimFilter === 'veg') return item.veg;
+                    if (activeSimFilter === 'bestsellers') return item.bestseller;
+                    return true;
+                });
+
+                // Calculate Cart Totals
+                let totalItems = 0;
+                let totalPrice = 0;
+                theme.items.forEach(item => {
+                    if (simCart[item.id]) {
+                        totalItems += simCart[item.id];
+                        totalPrice += simCart[item.id] * item.price;
+                    }
+                });
+
+                bodyEl.innerHTML = `
+                    <div>
+                        <!-- Filter Pills -->
+                        <div class="flex items-center justify-between gap-2 mb-3.5">
+                            <div class="flex items-center gap-1.5">
+                                <button onclick="setSimFilter('all')" class="px-3 py-1 rounded-lg text-xs font-bold border transition ${activeSimFilter === 'all' ? 'bg-brand-espresso text-white border-brand-espresso' : 'bg-brand-cream text-brand-espresso border-brand-sand'}">All</button>
+                                <button onclick="setSimFilter('veg')" class="px-3 py-1 rounded-lg text-xs font-bold border transition inline-flex items-center gap-1.5 ${activeSimFilter === 'veg' ? 'bg-brand-basil text-white border-brand-basil' : 'bg-brand-cream text-brand-espresso border-brand-sand'}">
+                                    <span class="w-2 h-2 rounded-full ${activeSimFilter === 'veg' ? 'bg-emerald-200' : 'bg-brand-basil'}"></span> Pure Veg
+                                </button>
+                                <button onclick="setSimFilter('bestsellers')" class="px-3 py-1 rounded-lg text-xs font-bold border transition ${activeSimFilter === 'bestsellers' ? 'bg-brand-chili text-white border-brand-chili' : 'bg-brand-cream text-brand-chili border-brand-sand'}">★ Bestsellers</button>
+                            </div>
+                            <span class="text-[11px] text-brand-muted font-bold">${filteredItems.length} dishes</span>
+                        </div>
+
+                        <!-- Menu Items List -->
+                        <div class="space-y-2.5 max-h-[210px] overflow-y-auto pr-1">
+                            ${filteredItems.map(dish => {
+                                const qty = simCart[dish.id] || 0;
+                                return `
+                                    <div class="flex items-center justify-between gap-3 p-3 rounded-2xl border border-brand-sand hover:border-brand-chili/50 bg-brand-cream/70 transition">
+                                        <div class="min-w-0">
+                                            <div class="flex items-center gap-2">
+                                                <span class="${dish.veg ? 'veg-dot' : 'nonveg-dot'}"></span>
+                                                <span class="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded bg-brand-goldTint text-brand-gold">${dish.tag}</span>
+                                            </div>
+                                            <div class="font-bold text-xs sm:text-sm text-brand-espresso mt-1 truncate">${dish.name}</div>
+                                            <div class="text-xs font-extrabold text-brand-espresso">₹${dish.price}</div>
+                                        </div>
+                                        ${qty === 0 ? `
+                                            <button onclick="updateSimCart('${dish.id}', 1)" class="px-3.5 py-1.5 rounded-xl border-2 border-brand-chili text-brand-chili hover:bg-brand-chili hover:text-white font-bold text-xs transition shrink-0">
+                                                + ADD
+                                            </button>
+                                        ` : `
+                                            <div class="flex items-center gap-2 bg-brand-chili text-white px-2.5 py-1 rounded-xl shrink-0 shadow-sm">
+                                                <button onclick="updateSimCart('${dish.id}', -1)" class="font-extrabold text-xs px-1">-</button>
+                                                <span class="font-bold text-xs">${qty}</span>
+                                                <button onclick="updateSimCart('${dish.id}', 1)" class="font-extrabold text-xs px-1">+</button>
+                                            </div>
+                                        `}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Mini Direct Checkout Cart Bar -->
+                    <div class="mt-4 pt-3 border-t border-brand-sand">
+                        <div class="bg-brand-espresso text-brand-cream rounded-2xl p-3 flex items-center justify-between gap-2 shadow-sm">
+                            <div class="text-xs">
+                                <span class="font-extrabold text-white">${totalItems} ${totalItems === 1 ? 'Item' : 'Items'} &bull; ₹${totalPrice}</span>
+                                <span class="block text-[10px] text-emerald-400 font-semibold">Saves ₹${Math.round(totalPrice * 0.28)} aggregator commission</span>
+                            </div>
+                            <button onclick="triggerSimCheckout()" class="bg-brand-basil hover:bg-brand-basilDark text-white font-extrabold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shrink-0 shadow">
+                                <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span>Order Direct &rarr;</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // Book a Table Interactive View
+                const guestOptions = [2, 4, 6, 8];
+                const slotOptions = ['7:30 PM', '8:00 PM', '9:00 PM'];
+                bodyEl.innerHTML = `
+                    <form onsubmit="triggerSimReservation(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-brand-espresso mb-1.5">Select Party Size</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                ${guestOptions.map(g => `
+                                    <button type="button" onclick="simGuestCount=${g}; renderSimulator();" class="py-2 rounded-xl text-xs font-bold border transition ${simGuestCount === g ? 'bg-brand-espresso text-white border-brand-espresso' : 'bg-brand-cream text-brand-espresso border-brand-sand'}">
+                                        ${g}${g === 8 ? '+' : ''} Guests
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-brand-espresso mb-1.5">Preferred Dinner Slot (Tonight)</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                ${slotOptions.map(slot => `
+                                    <button type="button" onclick="simTimeSlot='${slot}'; renderSimulator();" class="py-2 rounded-xl text-xs font-bold border transition ${simTimeSlot === slot ? 'bg-brand-chili text-white border-brand-chili' : 'bg-brand-cream text-brand-espresso border-brand-sand'}">
+                                        ${slot}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="bg-brand-goldTint border border-brand-gold/25 rounded-xl p-3 text-xs text-brand-espresso flex items-center justify-between">
+                            <span><i class="fa-solid fa-gift text-brand-chili mr-1"></i> Direct Booking Perk:</span>
+                            <strong class="text-brand-espresso">Priority Window Table</strong>
+                        </div>
+
+                        <button type="submit" class="w-full py-3 rounded-2xl bg-brand-chili hover:bg-brand-chiliDark text-white font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 shadow-chili-glow">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>Confirm Table for ${simGuestCount} at ${simTimeSlot}</span>
+                        </button>
+                    </form>
+                `;
+            }
+        }
+
+        // ==========================================
+        // 3. COMPARISON HIGHLIGHT TOGGLE
+        // ==========================================
+        function highlightComparison(side) {
+            const btnOld = document.getElementById('compToggleOld');
+            const btnNew = document.getElementById('compToggleNew');
+            const cardOld = document.getElementById('compCardOld');
+            const cardNew = document.getElementById('compCardNew');
+
+            if (side === 'old') {
+                btnOld.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-chili text-white shadow transition';
+                btnNew.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-brand-stone/75 hover:text-white transition';
+                cardOld.classList.add('ring-2', 'ring-brand-chili', 'scale-[1.01]');
+                cardNew.classList.remove('scale-[1.01]');
+                cardNew.classList.add('opacity-80');
+                cardOld.classList.remove('opacity-80');
+            } else {
+                btnNew.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-chili text-white shadow transition';
+                btnOld.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-brand-stone/75 hover:text-white transition';
+                cardNew.classList.add('scale-[1.01]');
+                cardOld.classList.remove('ring-2', 'ring-brand-chili', 'scale-[1.01]');
+                cardOld.classList.add('opacity-80');
+                cardNew.classList.remove('opacity-80');
+            }
+        }
+
+        // ==========================================
+        // 4. INTERACTIVE "SOLD OUT" MINI FEATURE DEMO
+        // ==========================================
+        let isDemoSoldOut = false;
+        function toggleSoldOutDemo() {
+            isDemoSoldOut = !isDemoSoldOut;
+            const statusText = document.getElementById('liveDishStatusText');
+            const btn = document.getElementById('soldOutDemoBtn');
+            if (isDemoSoldOut) {
+                statusText.textContent = 'Truffle Fries: Sold Out Tonight';
+                statusText.className = 'text-brand-chili font-bold';
+                btn.textContent = 'Mark Back In Stock';
+                btn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-basil hover:bg-brand-basilDark text-white transition shrink-0';
+                triggerToast('Live Menu Updated: "Truffle Fries" marked Sold Out across Web & Table QR!');
+            } else {
+                statusText.textContent = 'Truffle Fries: In Stock';
+                statusText.className = 'text-brand-basil font-bold';
+                btn.textContent = 'Mark Sold Out';
+                btn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold bg-brand-espresso hover:bg-brand-chili text-white transition shrink-0';
+                triggerToast('Live Menu Updated: "Truffle Fries" is available to order again!');
+            }
+        }
+
+        // ==========================================
+        // 5. TAILORED BY FOOD FORMAT TABS
+        // ==========================================
+        const foodFormats = {
+            cafes: {
+                tag: 'Specialty Coffee, Artisan Bakeries & Brunch Spots',
+                liftMetric: '+34% Direct Takeaway & Pre-Order Lift',
+                title: 'Turn Morning Coffee Runs & Custom Cake Inquiries Into Effortless Direct Orders',
+                desc: 'Designed with warm editorial photography, milk/bean customization options, pre-order pickup slots, and custom celebration cake order forms.',
+                pages: ['Home & Roastery Story', 'Interactive Beverage + Bake Menu', 'Custom Cake / Pre-Order Form', 'Dine-In QR Menu View', 'Find Us & Parking Guide'],
+                hooks: [
+                    { icon: 'fa-mug-saucer', title: 'Milk & Espresso Add-On Modifiers', text: 'Oat/Almond milk, extra shot, iced/hot & sweetness toggles built right into the cart.' },
+                    { icon: 'fa-cake-candles', title: '48-Hour Custom Cake Inquiry Flow', text: 'Customers pick sponge flavor, weight, message-on-cake & pickup time straight to WhatsApp.' },
+                    { icon: 'fa-clock', title: 'Skip-the-Queue Takeaway Pickup', text: 'Regulars order on their commute and grab fresh coffee straight from your counter.' }
+                ],
+                checklist: [
+                    'Warm alabaster & espresso editorial layout',
+                    'Bestseller pastry & seasonal drink showcase',
+                    'Pet-friendly / Wi-Fi / Work-from-cafe badges',
+                    '1-click Google Review & Instagram feed strip'
+                ]
+            },
+            dining: {
+                tag: 'Casual Dining, Family Bistros & Fine Dining',
+                liftMetric: '+41% Direct Weekend Table Bookings',
+                title: 'Elevate Your Ambience Online & Fill Prime-Time Tables Direct',
+                desc: 'Give guests an unforgettable first impression before they step through your doors—with rich visual storytelling, tasting menus, and frictionless table reservations.',
+                pages: ['Cinematic Homepage & Chef Philosophy', 'Course-Wise Food & Bar Menu', 'Instant Table & Private Dining Booking', 'Ambience Gallery & Press', 'Location, Valet & Dress Code'],
+                hooks: [
+                    { icon: 'fa-chair', title: 'Host-Desk Table Reservation Engine', text: 'Collects guest count, seating zone (indoor/patio), high-chair needs & anniversary notes.' },
+                    { icon: 'fa-pepper-hot', title: 'Dietary, Jain & Allergen Filters', text: 'Clear Pure Veg, Jain-available, Gluten-Free & Chef Signature icons on every dish.' },
+                    { icon: 'fa-users', title: 'Corporate & Group Party Lead Capture', text: 'Dedicated inquiry section for 15–80 guest kitty parties, birthdays & corporate dinners.' }
+                ],
+                checklist: [
+                    'High-contrast editorial Fraunces serif typography',
+                    'Zero third-party cover-charge booking fees',
+                    'Valet parking + live Google Maps pin',
+                    'Synced dine-in QR menu for every table'
+                ]
+            },
+            cloud: {
+                tag: 'Cloud Kitchens, Burger/Pizza Joints, Biryani & Late-Night QSR',
+                liftMetric: '+28% Higher Average Order Value (AOV)',
+                title: 'Engineered Purely for Speed, High-Margin Combos & Repeat Direct Orders',
+                desc: 'When hungry customers land on a cloud kitchen site at 11 PM, every extra click loses a sale. PresencePlus builds ultra-fast, appetite-triggering direct ordering storefronts.',
+                pages: ['Sticky Category Direct-Order Storefront', 'Combo Builder & BOGO Deals Bar', 'Cart + Coupon & Pin-Code Checker', 'Bulk / House-Party Box Page', 'Track / WhatsApp Kitchen Support'],
+                hooks: [
+                    { icon: 'fa-boxes-stacked', title: 'Smart Meal-Combo & Drink Upsells', text: 'Automatically prompts "+₹99 Peri Fries & Coke" at checkout to lift Average Order Value by 22%.' },
+                    { icon: 'fa-ticket', title: 'First-Order Direct Promo Codes', text: 'Convert Zomato/Swiggy buyers using takeout box QR stickers with code DIRECT15.' },
+                    { icon: 'fa-database', title: '100% Customer Phone List Ownership', text: 'Export repeat buyers anytime to send match-day or weekend combo broadcasts.' }
+                ],
+                checklist: [
+                    'Loads in <0.7 seconds on mobile data',
+                    'Multi-brand tab support (2–3 brands, 1 kitchen)',
+                    'UPI / Razorpay + WhatsApp order ticket sync',
+                    'Instant 1-tap "Out of Stock" toggle during rush'
+                ]
+            },
+            bars: {
+                tag: 'Craft Cocktails, Microbreweries, Pubs & Rooftop Lounges',
+                liftMetric: '2.4x Faster Friday Guestlist & VIP Table RSVPs',
+                title: 'Pack Your Guestlist, Friday Tables & Signature Cocktail Menu',
+                desc: 'High-energy hospitality design showcasing what’s on tap, weekend DJ/live gig lineups, happy-hour countdowns, and VIP table bookings.',
+                pages: ['Atmospheric Home & Tonight’s Lineup', 'Taproom / Signature Cocktail & Tapas Menu', 'VIP Table & Guestlist RSVP', 'Events & Private Buyout Page', 'Age Gate, Rules & Location'],
+                hooks: [
+                    { icon: 'fa-calendar-check', title: 'Live Gig & Weekend Event Calendar', text: 'Update Friday sundowner & Saturday DJ posters in seconds with 1-tap RSVP.' },
+                    { icon: 'fa-beer-mug-empty', title: 'Live "On Tap Today" & Happy Hour Menu', text: 'Highlight craft pours, ABV%, tasting notes, and 4 PM–8 PM Happy Hour deals.' },
+                    { icon: 'fa-champagne-glasses', title: 'Bottle Service & Rooftop Table Requests', text: 'Route high-ticket group table bookings straight to your floor manager’s WhatsApp.' }
+                ],
+                checklist: [
+                    'Rich espresso & warm amber lounge aesthetic',
+                    'QR coaster & bar-menu ready out of the box',
+                    'Stag/couple entry policy & dress code clarity',
+                    'Private celebration & corporate mixer inquiry form'
+                ]
+            }
+        };
+
+        function selectFoodFormat(key) {
+            document.querySelectorAll('.fmt-tab-btn').forEach(btn => {
+                btn.className = 'fmt-tab-btn px-5 py-3 rounded-2xl font-bold text-sm bg-white text-brand-espresso hover:bg-brand-stone border border-brand-sand transition flex items-center gap-2';
+            });
+            const active = document.getElementById(`fmtBtn-${key}`);
+            if (active) {
+                active.className = 'fmt-tab-btn px-5 py-3 rounded-2xl font-bold text-sm bg-brand-espresso text-brand-cream shadow-sm transition flex items-center gap-2';
+            }
+
+            const f = foodFormats[key];
+            const panel = document.getElementById('foodFormatPanel');
+            panel.innerHTML = `
+                <div class="grid lg:grid-cols-12 gap-10 items-start">
+                    <div class="lg:col-span-7 space-y-5">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="inline-block text-xs font-extrabold uppercase tracking-wider px-3.5 py-1 rounded-full bg-brand-chiliTint text-brand-chili">
+                                ${f.tag}
+                            </span>
+                            <span class="inline-block text-xs font-extrabold px-3 py-1 rounded-full bg-brand-basilTint text-brand-basil">
+                                <i class="fa-solid fa-arrow-trend-up mr-1"></i>${f.liftMetric}
+                            </span>
+                        </div>
+                        <h3 class="font-serif font-semibold text-2xl sm:text-3xl text-brand-espresso leading-tight">
+                            ${f.title}
+                        </h3>
+                        <p class="text-brand-muted text-sm sm:text-base leading-relaxed">
+                            ${f.desc}
+                        </p>
+
+                        <div class="space-y-3 pt-2">
+                            ${f.hooks.map(h => `
+                                <div class="bg-white p-4 rounded-2xl border border-brand-sand flex items-start gap-3.5 shadow-sm">
+                                    <div class="w-10 h-10 rounded-xl bg-brand-stone text-brand-chili flex items-center justify-center shrink-0 mt-0.5">
+                                        <i class="fa-solid ${h.icon}"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-sm text-brand-espresso">${h.title}</div>
+                                        <div class="text-xs text-brand-muted mt-0.5 leading-relaxed">${h.text}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-7 border border-brand-sand space-y-6 shadow-sm">
+                        <div>
+                            <div class="text-xs font-extrabold uppercase tracking-wider text-brand-chili mb-3">Must-Have Modules &amp; Pages</div>
+                            <div class="space-y-2">
+                                ${f.pages.map((p, idx) => `
+                                    <div class="flex items-center gap-2.5 text-xs sm:text-sm font-semibold text-brand-espresso bg-brand-cream px-3.5 py-2.5 rounded-xl border border-brand-sand">
+                                        <span class="w-5 h-5 rounded-md bg-brand-espresso text-brand-cream text-[11px] flex items-center justify-center font-bold">0${idx + 1}</span>
+                                        <span>${p}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="pt-4 border-t border-brand-sand">
+                            <div class="text-xs font-extrabold uppercase tracking-wider text-brand-espresso mb-2.5">Conversion Checklist Included</div>
+                            <ul class="space-y-2 text-xs text-brand-muted">
+                                ${f.checklist.map(c => `
+                                    <li class="flex items-center gap-2">
+                                        <i class="fa-solid fa-circle-check text-brand-basil"></i>
+                                        <span>${c}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+
+                        <button onclick="openMockupModal('Format Preview: ${f.tag}')" class="w-full py-3.5 rounded-xl bg-brand-chili hover:bg-brand-chiliDark text-white font-bold text-xs sm:text-sm shadow-chili-glow transition">
+                            Request Sample Mockup for This Format &rarr;
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ==========================================
+        // 6. AGGREGATOR COMMISSION SAVINGS CALCULATOR
+        // ==========================================
+        let currentMonthlySavedFormatted = '₹32,760';
+
+        function formatINR(num) {
+            return '₹' + Math.round(num).toLocaleString('en-IN');
+        }
+
+        function runSavingsCalculator() {
+            const orders = parseInt(document.getElementById('calcOrders').value, 10);
+            const aov = parseInt(document.getElementById('calcAov').value, 10);
+            const commRate = parseInt(document.getElementById('calcComm').value, 10);
+
+            document.getElementById('calcOrdersVal').textContent = `${orders} orders / mo`;
+            document.getElementById('calcAovVal').textContent = formatINR(aov);
+            document.getElementById('calcCommVal').textContent = `${commRate}%`;
+
+            const monthlyGmv = orders * aov;
+            const monthlySaved = monthlyGmv * (commRate / 100);
+            const annualSaved = monthlySaved * 12;
+
+            // Compare payback against our ₹24,999 Direct Ordering Pro Website
+            const websiteCost = 24999;
+            const dailySaved = monthlySaved / 30;
+            const paybackDays = Math.max(3, Math.round(websiteCost / dailySaved));
+
+            currentMonthlySavedFormatted = formatINR(monthlySaved);
+
+            document.getElementById('outMonthlyGmv').textContent = formatINR(monthlyGmv);
+            document.getElementById('outMonthlySaved').textContent = currentMonthlySavedFormatted;
+            document.getElementById('outAnnualSaved').textContent = formatINR(annualSaved);
+
+            if (paybackDays <= 45) {
+                document.getElementById('outPaybackDays').textContent = `~${paybackDays} Days`;
+            } else {
+                const months = (paybackDays / 30).toFixed(1);
+                document.getElementById('outPaybackDays').textContent = `~${months} Months`;
+            }
+        }
+
+        // ==========================================
+        // 7. PRICING CARE MODE TOGGLE
+        // ==========================================
+        function toggleCareMode(mode) {
+            const selfBtn = document.getElementById('careSelfBtn');
+            const managedBtn = document.getElementById('careManagedBtn');
+            const subtexts = document.querySelectorAll('.care-subtext');
+
+            if (mode === 'managed') {
+                managedBtn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-espresso text-brand-cream transition';
+                selfBtn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-brand-muted hover:text-brand-espresso transition';
+                subtexts[0].textContent = '+ ₹999/mo high-speed hosting, backups & WhatsApp menu edits';
+                subtexts[1].textContent = '+ ₹999/mo hosting, seasonal banner updates & priority support';
+                subtexts[2].textContent = '+ ₹1,999/mo multi-branch cloud hosting & SLA care';
+            } else {
+                selfBtn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-brand-espresso text-brand-cream transition';
+                managedBtn.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-brand-muted hover:text-brand-espresso transition';
+                subtexts[0].textContent = 'Includes 1st year SSL security & handover training';
+                subtexts[1].textContent = '0% commission forever • Keep 100% of every order';
+                subtexts[2].textContent = '₹5,000 per additional outlet thereafter';
+            }
+        }
+
+        // ==========================================
+        // 8. RESTAURANT OWNER FAQ ACCORDION
+        // ==========================================
+        const faqs = [
+            {
+                q: 'Do I own my domain name, website code, and customer phone numbers?',
+                a: '100% yes. Unlike SaaS platforms that hold your domain and menu hostage if you stop paying monthly fees, your PresencePlus website lives on your own domain (e.g., yourrestaurant.in) and you can export your full customer database anytime.'
+            },
+            {
+                q: 'How hard is it to change dish prices or mark an item Sold Out during dinner rush?',
+                a: 'It takes less than 30 seconds from any smartphone. You get a clean, password-protected owner dashboard where your manager can update a price, toggle an item "Sold Out", or add a weekend chef special—and both your website and dine-in QR menus update instantaneously.'
+            },
+            {
+                q: 'How do direct orders reach my kitchen, and how do payments work?',
+                a: 'You can choose either (or both!): 1) Online Payment via Razorpay/UPI where pre-paid orders land on your kitchen WhatsApp & order dashboard with an audio alert, or 2) Direct WhatsApp Order Tickets where the guest’s itemized cart, address pin, and bill total arrive formatted cleanly on your counter WhatsApp.'
+            },
+            {
+                q: 'How do we handle delivery riders when customers order directly from our website?',
+                a: 'Many cafes and cloud kitchens use their own 1–2 neighbourhood riders within 4 km, or book on-demand hyperlocal couriers (Porter / Shadowfax / Borzo / Uber Courier) for a flat ₹40–₹70 instead of paying ₹200+ in percentage commissions on large family orders.'
+            },
+            {
+                q: 'We don’t have professional food photography yet. Can we still launch in 7 days?',
+                a: 'Absolutely. PresencePlus enhances your best existing dish shots and pairs them with appetizing warm typography and icon-driven menu sections so your menu looks crisp, fast, and premium—and you can swap in new photos anytime later with one tap.'
+            }
+        ];
+
+        let openFaqIndex = 0;
+        function renderFaqs() {
+            const container = document.getElementById('faqContainer');
+            container.innerHTML = faqs.map((item, idx) => {
+                const isOpen = openFaqIndex === idx;
+                return `
+                    <div class="bg-white rounded-2xl border ${isOpen ? 'border-brand-chili/60 shadow-soft' : 'border-brand-sand'} overflow-hidden transition">
+                        <button onclick="toggleFaq(${idx})" class="w-full px-6 py-4 text-left flex items-center justify-between gap-4">
+                            <span class="font-bold text-sm sm:text-base text-brand-espresso">${item.q}</span>
+                            <span class="w-7 h-7 rounded-full ${isOpen ? 'bg-brand-chili text-white' : 'bg-brand-stone text-brand-espresso'} flex items-center justify-center shrink-0 transition">
+                                <i class="fa-solid ${isOpen ? 'fa-minus' : 'fa-plus'} text-xs"></i>
+                            </span>
+                        </button>
+                        ${isOpen ? `
+                            <div class="px-6 pb-5 text-sm text-brand-muted leading-relaxed border-t border-brand-sand pt-3">
+                                ${item.a}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleFaq(idx) {
+            openFaqIndex = openFaqIndex === idx ? -1 : idx;
+            renderFaqs();
+        }
+
+        // ==========================================
+        // 9. FREE HOMEPAGE MOCKUP MODAL LOGIC
+        // ==========================================
+        function openMockupModal(contextText) {
+            const modal = document.getElementById('mockupModal');
+            const badge = document.getElementById('modalSelectedBadge');
+            document.getElementById('mockupFormView').classList.remove('hidden');
+            document.getElementById('mockupSuccessView').classList.add('hidden');
+            badge.textContent = contextText || 'Free 24-Hour Homepage Preview';
+
+            // Sync live calculator savings into the modal summary pill
+            const modalSavingsEl = document.getElementById('modalSavingsAmt');
+            if (modalSavingsEl) {
+                modalSavingsEl.textContent = `${currentMonthlySavedFormatted} / month`;
+            }
+
+            // Pre-select package dropdown if user clicked a specific pricing tier
+            const pkgSelect = document.getElementById('inpPackage');
+            if (contextText && contextText.includes('14,999')) {
+                pkgSelect.value = 'Starter Digital Menu & Booking (₹14,999)';
+            } else if (contextText && contextText.includes('24,999')) {
+                pkgSelect.value = 'Direct Ordering Pro (₹24,999)';
+            } else if (contextText && contextText.includes('44,999')) {
+                pkgSelect.value = 'Multi-Outlet Brand Suite (₹44,999)';
+            }
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeMockupModal() {
+            const modal = document.getElementById('mockupModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('mockupModal').addEventListener('click', (e) => {
+            if (e.target.id === 'mockupModal') closeMockupModal();
+        });
+
+        function handleMockupSubmit(e) {
+            e.preventDefault();
+            const restName = document.getElementById('inpRestName').value.trim();
+            const city = document.getElementById('inpCity').value.trim();
+            const format = document.getElementById('inpFormat').value;
+            const whatsapp = document.getElementById('inpWhatsapp').value.trim();
+            const pkg = document.getElementById('inpPackage').value;
+
+            document.getElementById('mockupFormView').classList.add('hidden');
+            document.getElementById('mockupSuccessView').classList.remove('hidden');
+
+            document.getElementById('mockupConfirmSummary').textContent =
+                `PresencePlus is crafting a custom ${format} website mockup for "${restName}" (${city}) tailored to ${pkg}, and will send your clickable preview link to ${whatsapp}.`;
+
+            triggerToast(`Free PresencePlus mockup queued for ${restName}!`);
+            e.target.reset();
+        }
+
+        // ==========================================
+        // INITIALIZE ALL INTERACTIVE WIDGETS ON LOAD
+        // ==========================================
+        window.onload = function () {
+            renderSimulator();
+            selectFoodFormat('cafes');
+            runSavingsCalculator();
+            renderFaqs();
+        };
+    </script>
+</body>
+</html>
